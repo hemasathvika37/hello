@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ffe6f2,#fff0f5);
+    overflow:hidden;
+}
+
+.page{
+    display:none;
+    height:100vh;
+    width:100%;
+    text-align:center;
+    padding:40px;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.active{
+    display:flex;
+}
+
+h1{
+    color:#ff4d88;
+    margin-bottom:20px;
+}
+
+p{
+    max-width:700px;
+    color:#555;
+    line-height:1.8;
+}
+
+button{
+    margin-top:30px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:#ff80aa;
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+}
+
+button:hover{
+    background:#ff5c99;
+}
+
+.heart{
+    position:absolute;
+    color:pink;
+    animation:float 10s linear infinite;
+    font-size:24px;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    100%{
+        transform:translateY(-100vh);
+        opacity:1;
+    }
+}
+
+.surprise-grid{
+    display:grid;
+    grid-template-columns:repeat(4,80px);
+    gap:15px;
+    margin-top:20px;
+}
+
+.box{
+    width:80px;
+    height:80px;
+    background:white;
+    border:2px solid pink;
+    border-radius:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    color:#ff4d88;
+    font-weight:bold;
+}
+
+#popup{
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+    z-index:100;
+}
+
+#popup button{
+    margin-top:15px;
+}
+
+.final{
+    background:linear-gradient(135deg,#fff,#ffe6f2);
+}
+
+.decor{
+    font-size:50px;
+    margin:20px;
+}
+</style>
+</head>
+<body>
+
+<div id="hearts"></div>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <h1>❤️ For My Favourite Person ❤️</h1>
+    <button onclick="nextPage(2)">Click Here</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <h1>💌 Love Letter</h1>
+
+    <p>
+        EDIT YOUR LOVE LETTER HERE...
+    </p>
+
+    <button onclick="nextPage(3)">Next ➜</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+    <h1>🎵 Our Favourite Songs</h1>
+
+    <p>
+        Song 1 <br>
+        Song 2 <br>
+        Song 3 <br>
+        Song 4
+    </p>
+
+    <button onclick="nextPage(4)">Next ➜</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+    <h1>🌸 What You Should Change</h1>
+
+    <p>
+        Write things gently and lovingly here...
+    </p>
+
+    <button onclick="nextPage(5)">Next ➜</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+    <h1>🎁 Things I Need From You</h1>
+
+    <div class="surprise-grid">
+        <div class="box" onclick="showMsg('Surprise Message 1 ❤️')">1</div>
+        <div class="box" onclick="showMsg('Surprise Message 2 🌸')">2</div>
+        <div class="box" onclick="showMsg('Surprise Message 3 💕')">3</div>
+        <div class="box" onclick="showMsg('Surprise Message 4 ✨')">4</div>
+        <div class="box" onclick="showMsg('Surprise Message 5 ❤️')">5</div>
+        <div class="box" onclick="showMsg('Surprise Message 6 🌹')">6</div>
+        <div class="box" onclick="showMsg('Surprise Message 7 💖')">7</div>
+        <div class="box" onclick="showMsg('Surprise Message 8 🥰')">8</div>
+    </div>
+
+    <button onclick="nextPage(6)">Final Page ➜</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page final" id="page6">
+
+    <div class="decor">🤍 💖 🤍</div>
+
+    <h1>Forever & Always</h1>
+
+    <p>
+        Thank you for being part of my life.<br>
+        You are my favourite chapter, my favourite memory,
+        and my favourite person. ❤️
+    </p>
+
+    <div class="decor">💖 🤍 💖</div>
+
+</div>
+
+<div id="popup">
+    <h2 id="popupText"></h2>
+    <button onclick="closePopup()">Close</button>
+</div>
+
+<script>
+
+function nextPage(num){
+    document.querySelectorAll('.page').forEach(page=>{
+        page.classList.remove('active');
+    });
+
+    document.getElementById('page'+num).classList.add('active');
+}
+
+function showMsg(text){
+    document.getElementById('popupText').innerText=text;
+    document.getElementById('popup').style.display='block';
+}
+
+function closePopup(){
+    document.getElementById('popup').style.display='none';
+}
+
+function createHeart(){
+    let heart=document.createElement('div');
+
+    heart.classList.add('heart');
+    heart.innerHTML='❤';
+
+    heart.style.left=Math.random()*100+'vw';
+    heart.style.fontSize=(20+Math.random()*30)+'px';
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },10000);
+}
+
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
